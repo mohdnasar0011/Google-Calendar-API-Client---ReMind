@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    
+    <!-- CRITICAL PWA TAGS: Prevents unwanted zoom on mobile inputs and handles mobile notches -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover" />
+    
+    <!-- Matches your React app's base background color (--app-bg) for seamless top/bottom bars -->
+    <meta name="theme-color" content="#FAFAFA" />
+    
+    <meta
+      name="description"
+      content="A calm, efficient workspace to manage your schedule and automate email reminders."
+    />
+    
+    <!-- iOS Specific PWA Tags (Fixed deprecation warning) -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Reminders" />
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <!-- Performance: Load the Inter font immediately to prevent Flash of Unstyled Text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ⚡ FIX: Instant CSS to prevent dark mode black flash while Tailwind loads -->
+    <style>
+      html, body {
+        background-color: #FAFAFA !important;
+        color: #0F172A !important;
+        margin: 0;
+      }
+    </style>
+
+    <!-- REQUIRED FOR STYLING: Tailwind CSS CDN to process the classes used in App.js -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Smart Reminders</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    
+    <!-- Your React App.jsx will mount here -->
+    <div id="root"></div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('%PUBLIC_URL%/service-worker.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
